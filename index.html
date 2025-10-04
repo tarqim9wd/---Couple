@@ -40,6 +40,7 @@
         nav ul {
             list-style: none;
             display: flex;
+            align-items: center;
         }
         ul li {
             margin-left: 30px;
@@ -214,7 +215,7 @@
                 errorModal.classList.add("hidden");
             }
 
-            // Fetch Roblox profile
+            // Fetch Roblox profile (MODIFIED: Z3MA SEARCH)
             async function fetchProfile() {
                 const username = document.getElementById("username").value.trim();
                 const profile = document.getElementById("profile");
@@ -231,44 +232,21 @@
                     return;
                 }
                 
+                // Show loading (z3ma kydir search)
                 loadingOverlay.classList.remove("hidden");
                 
-                try {
-                    // Step 1: Get user ID
-                    const res1 = await fetch(`https://abadaoucht.com/tiktok/api/roblox/userinfo/${username}`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ 
-                            usernames: [username], 
-                            excludeBannedUsers: true 
-                        })
-                    });
-
-                    const data1 = await res1.json();
-                    if (!data1.data || data1.data.length === 0) {
-                        throw new Error("User not found");
-                    }
-
-                    const userId = data1.data[0].id;
-                    const displayName = data1.data[0].displayName;
-
-                    // Step 2: Get avatar image
-                    const res2 = await fetch(
-                        `https://thumbnails.roproxy.com/v1/users/avatar?userIds=${userId}&size=150x150&format=Png&isCircular=false`
-                    );
-                    const data2 = await res2.json();
-                    const avatarUrl = data2.data[0].imageUrl;
-
-                    // Update UI
-                    document.getElementById("avatar").src = avatarUrl;
-                    document.getElementById("display-name").textContent = displayName;
+                // Simulate delay bla API
+                setTimeout(() => {
+                    // Hna kynzlo l'username li ktb o sora generic
+                    document.getElementById("display-name").textContent = username;
+                    // Sora d roblox 3adiya hit 7ydna api
+                    document.getElementById("avatar").src = "https://tr.rbxcdn.com/535d2a90722c4df6ec4928c8ea3703cb/150/150/AvatarHeadshot/Png";
+                    
+                    // Kybano robux
                     profile.classList.remove("hidden");
                     resourceSection.classList.remove("hidden");
-                } catch (err) {
-                    showError("User not found. Please check the username and try again.");
-                } finally {
                     loadingOverlay.classList.add("hidden");
-                }
+                }, 1500); // W9t d z3ma search
             }
 
             // Select Robux amount
@@ -310,14 +288,13 @@
             
             // Close popup ad
             function closePopup() {
-                document.getElementById('popupAd').style.display = 'none';
+                // document.getElementById('popupAd').style.display = 'none';
             }
             
-            // Load ad in iframe (replace with your actual ad URL)
+            // Load ad in iframe
             function loadAd() {
-                const iframe = document.getElementById('adIframe');
-                // Replace this with your actual ad URL
-                iframe.src = '';
+                // const iframe = document.getElementById('adIframe');
+                // iframe.src = '';
             }
 
             // Expose functions to global scope
